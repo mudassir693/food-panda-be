@@ -1,6 +1,20 @@
+const dotenv = require('dotenv')
+dotenv.config()
+
 const express = require('express')
+const morgan = require('morgan')
+const connect_DB = require('./config/DB_Config')
+
+
 
 const app = express()
+
+
+app.use(express.json())
+app.use(express.urlencoded({extended:true}))
+app.use(morgan("dev"))
+// DB COnnection
+connect_DB()
 
 app.get('/',(req,res)=>{
     try {
@@ -11,9 +25,18 @@ app.get('/',(req,res)=>{
     }
 })
 
+app.use('/api/users/',require('./routes/user'))
+
 const port = process.env.PORT || 5000
 
+
+
 app.listen(port,()=>{
+    if(port == '5000'){
+        console.log("server is running on development mode")
+    }else{
+        console.log("server is running on production mode")
+    }
     console.log(`server running on port: ${port}`)
 })
 
