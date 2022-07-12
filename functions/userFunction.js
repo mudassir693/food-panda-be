@@ -32,7 +32,18 @@ const getUsers = async (req,res)=>{
     }
 }
 
+const updUser = async(req,res)=>{
+    try {
+        const {Email,...others} = req.body
+        const updUser = await User.findByIdAndUpdate(req.params.id,{$set:others},{new:true})
+        return res.status(200).json({data:updUser,error:false})
+    } catch (error) {
+        return res.status(500).json({data:error,error:true})
+    }
+}
+
 module.exports = {
     addNewUser,
-    getUsers
+    getUsers,
+    updUser
 }
