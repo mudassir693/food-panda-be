@@ -7,6 +7,11 @@ chai.should()
 
 chai.use(chaiHttp)
 
+before(function (done) {
+    this.timeout(3000);
+    setTimeout(done, 2000);
+  });
+
 describe('User Test cases',()=>{
     // it('POST test it should create User',(done)=>{
     //     const body = {

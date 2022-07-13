@@ -65,11 +65,21 @@ const deleteResturant = async(req,res)=>{
     }
 }
 
+const getResturantByName = async(req,res)=>{
+    try {
+        const resp = await Resturant.find({$regex:req.params.name})
+        return res.status(200).json({data:resp,error:false})
+    } catch (error) {
+        return res.status(500).json({data:error,error:true})
+    }
+}
+
 
 module.exports = {
     addResturant,
     getAllResturants,
     getResturantById, 
     updateResturant, 
-    deleteResturant
+    deleteResturant,
+    getResturantByName
 }

@@ -9,6 +9,11 @@ chai.should()
 // xhai http:
 chai.use(chaiHttp)
 
+before(function (done) {
+    this.timeout(3000);
+    setTimeout(done, 2000);
+  });
+
 describe('resturants Tests',()=>{
     // it('POST should ADD Resturant',(done)=>{
     //     const body = {
