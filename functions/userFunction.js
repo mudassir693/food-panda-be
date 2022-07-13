@@ -42,8 +42,18 @@ const updUser = async(req,res)=>{
     }
 }
 
+const deleteUser = async (req,res)=>{
+    try {
+        const resp = await User.findByIdAndRemove(req.params.id)
+        return res.status(200).json({data:resp,error:false})
+    } catch (error) {
+        return res.status(500).json({data:error,error:true})
+    }
+}
+
 module.exports = {
     addNewUser,
     getUsers,
-    updUser
+    updUser,
+    deleteUser
 }

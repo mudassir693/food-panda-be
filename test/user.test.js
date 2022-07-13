@@ -51,4 +51,15 @@ describe('User Test cases',()=>{
             })
             done()
     })
+
+    it('DELETE should delete user',(done)=>{
+        chai.request(server)
+            .delete(`/api/users/delete/62cd5f770a91ebc76abedfbc`)
+            .end((err,resp)=>{
+                resp.should.have.status(200)
+                resp.body.should.have.property('data')
+                resp.body.should.have.property('error').eq(false)
+            })
+            done()
+    })
 })
