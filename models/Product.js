@@ -24,14 +24,6 @@ const productSchema = new mongoose.Schema({
     },
     Description:{
         type:String
-    },
-    CoOrdinates:{
-        lat:{
-            type:String
-        },
-        lon:{
-            type:String
-        }
     }
 })
 

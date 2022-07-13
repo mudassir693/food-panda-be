@@ -6,7 +6,7 @@ const addResturant = async(req,res)=>{
         const {Name, Address, Image, Description, Rating, CoOrdinates, Category} = req.body
         const isResturantAvailable = await Resturant.findOne({Name})
         if(isResturantAvailable){
-            return res.status(400).josn({data:"this resturant is already register"})
+            return res.status(400).json({data:"this resturant is already register",error:true})
         }
         const newresturant = new Resturant({
             Name, Address, Image, Description, Rating, CoOrdinates, Category

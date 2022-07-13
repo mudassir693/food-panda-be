@@ -13,6 +13,14 @@ const userSchema = new mongoose.Schema({
     Address:{
         type:String
     },
+    CoOrdinates:{
+        lat:{
+            type:String
+        },
+        lon:{
+            type:String
+        }
+    },
     CreatedDate:{
         type:Date
     }

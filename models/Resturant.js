@@ -5,7 +5,7 @@ const resturantSchema = new mongoose.Schema({
         type:String
     },
     Address:{
-        type:STring
+        type:String
     },
     Image:{
         type:String
@@ -26,6 +26,9 @@ const resturantSchema = new mongoose.Schema({
     },
     Category:{
         type:String
+    },
+    CreatedDate:{
+        type:Date
     }
 })
 

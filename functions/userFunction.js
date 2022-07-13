@@ -14,7 +14,8 @@ const addNewUser = async(req,res)=>{
             Email,
             Address,
             PhoneNumber,
-            CreatedDate
+            CreatedDate,
+            CoOrdinates
         }) 
         const addUserResp = await newUser.save()
         return res.status(201).json({data:addUserResp,error:false})
