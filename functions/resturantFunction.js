@@ -34,6 +34,9 @@ const getAllResturants = async(req,res)=>{
 const getResturantById = async(req,res)=>{
     try{
         const resp = await Resturant.findById(req.params.id)
+        if(!resp){
+            return res.status(400).json({data:"requested element not found",error:true})
+        }
 
         return res.status(200).json({data:resp,error:false})
     }catch (error) {

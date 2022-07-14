@@ -51,6 +51,27 @@ describe('resturants Tests',()=>{
             done()
     })
 
+    it('GET should NOT get resturant by WRONG Id',(done)=>{
+        chai.request(server)
+            .get('/api/resturants/getById/62cf144a4c02339e83d72dee')
+            .end((err,resp)=>{
+                resp.should.have.status(400)
+                resp.body.should.have.property('error').eq(true)
+                resp.body.should.have.property('data')
+            })
+            done()
+    })
+
+    it('GET should resturant by Id',(done)=>{
+        chai.request(server)
+            .get('/api/resturants/getById/62cf144a4c02339e83d72ded')
+            .end((err,resp)=>{
+                resp.should.have.property('error').eq(false)
+                resp.body.should.have.property('data').should.have.property('Name').eq('Testing Resturant')
+            })
+            done()
+    })
+
 
     it('GET should get Resturants with name',(done)=>{
         const body = {
