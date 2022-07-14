@@ -51,4 +51,22 @@ describe('resturants Tests',()=>{
             done()
     })
 
+
+    it('GET should get Resturants with name',(done)=>{
+        const body = {
+            Name:"Test Resturant", 
+            CratedDate: new Date(), 
+            Address:"Testing address", 
+            Description: "this is just testing resturant, that runs through chai testing."
+        }
+        chai.request(server)
+            .get('/api/resturants/getByName/Te')
+            .end((err,resp)=>{
+                resp.should.have.status(200)
+                resp.body.should.have.property('error').eq(false)
+                resp.body.should.have.property('data')
+            })
+            done()
+    })
+
 })
