@@ -35,7 +35,7 @@ describe('User Test cases',()=>{
         .end((err,resp)=>{
             resp.should.have.status(200)
             resp.body.should.have.property('error').eq(false)
-            resp.body.should.have.property('data').should.be.a('object')
+            resp.body.should.have.property('data')
         })
         done()
         

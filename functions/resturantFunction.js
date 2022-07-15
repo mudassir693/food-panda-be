@@ -49,9 +49,10 @@ const updateResturant = async(req,res)=>{
     try {
         const {Name, ...others} = req.body
 
-        const updResturant = await Resturant.findByIdAndUpdate(req,params.id,{$set:others},{new:true})
+        const updResturant = await Resturant.findByIdAndUpdate(req.params.id,{$set:others},{new:true})
 
-        return res.status(200).json({data:updResturant,error:true})
+
+        return res.status(200).json({data:updResturant,error:false})
     } catch (error) {
         console.log("addRestError: ", error);
         return res.status(500).json({data:error,error:true})
@@ -61,6 +62,9 @@ const updateResturant = async(req,res)=>{
 const deleteResturant = async(req,res)=>{
     try {
         const resp = await Resturant.findByIdAndDelete(req.params.id)
+        if(!resp){
+            return res.status(404).json({data:'deleted has error',error:true})
+        }
         return res.status(200).json({data:"Resturant deleted sucessfully",error:false})
     } catch (error) {
         console.log("addRestError: ", error);

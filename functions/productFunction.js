@@ -6,7 +6,7 @@ const addProduct = async(req,res)=>{
         const {Image, Title, ResturantId, CreatedDate, Price, Rating, Category, Description} = req.body
         const isProductAvailable = await Product.findOne({$and:[{Title},{ResturantId}]})
         if(isProductAvailable){
-            return res.status(400).josn({data:"this product is already available in this resturant",error:true})
+            return res.status(400).json({data:"this product is already available in this resturant",error:true})
         }
         const newProduct = new Product({
             Image, Title, ResturantId, CreatedDate, Price, Rating, Category, Description
@@ -42,12 +42,24 @@ const getProductById = async(req,res)=>{
     }
 }
 
+const getProductByIdResturant = async(req,res)=>{
+    try {
+        const resp = await Product.find({ResturantId: req.params.id})
+
+        return res.status(200).json({data:resp,error:false})
+    } catch (error) {
+        console.log("get Prod by Id Error: ", error);
+        return res.status(500).json({data:error,error:true})    
+    }
+}
+
 const updateProduct = async(req,res)=>{
     try {
 
-        const updResturant = await Product.findByIdAndUpdate(req,params.id,{$set:req.body},{new:true})
+        const updResturant = await Product.findByIdAndUpdate(req.params.id,{$set:req.body},{new:true})
+        console.log('required object: ',updResturant,' body: ',req.body);
 
-        return res.status(200).json({data:updResturant,error:true})
+        return res.status(200).json({data:updResturant,error:false})
     } catch (error) {
         console.log("update product error: ", error);
         return res.status(500).json({data:error,error:true})
@@ -70,5 +82,6 @@ module.exports = {
     getAllProducts,
     getProductById, 
     updateProduct, 
-    deleteProduct
+    deleteProduct,
+    getProductByIdResturant
 }

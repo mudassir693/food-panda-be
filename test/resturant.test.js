@@ -66,8 +66,9 @@ describe('resturants Tests',()=>{
         chai.request(server)
             .get('/api/resturants/getById/62cf144a4c02339e83d72ded')
             .end((err,resp)=>{
-                resp.should.have.property('error').eq(false)
-                resp.body.should.have.property('data').should.have.property('Name').eq('Testing Resturant')
+                resp.should.have.status(200)
+                resp.body.should.have.property('error').eq(false)
+                resp.body.should.have.property('data')
             })
             done()
     })
@@ -86,6 +87,33 @@ describe('resturants Tests',()=>{
                 resp.should.have.status(200)
                 resp.body.should.have.property('error').eq(false)
                 resp.body.should.have.property('data')
+            })
+            done()
+    })
+
+    it('PUT shout update resturant',(done)=>{
+        const body = {
+            Name:'Resturant Name Updated.',
+            Address:'Update Address'
+        }
+        chai.request(server)
+            .put('/api/resturants/update/62cf144a4c02339e83d72ded')
+            .send(body)
+            .end((err, resp)=>{
+                resp.should.have.status(200)
+                resp.body.should.have.property('error').eq(false)
+                resp.body.should.have.property('data')
+            })
+            done()
+    })
+
+    it('DELETE should delete resturant',(done)=>{
+        chai.request(server)
+            .delete('/api/resturants/delete/62cf144a4c02339e83d72ded')
+            .end((err,resp)=>{
+                resp.should.have.status(200)
+                resp.body.should.have.property('error').eq(false)
+                resp.body.should.have.property('data').eq("Resturant deleted sucessfully")
             })
             done()
     })
