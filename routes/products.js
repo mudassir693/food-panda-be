@@ -1,6 +1,10 @@
 const router = require('express').Router();
 const {addProduct,getAllProducts,getProductById, updateProduct, deleteProduct, getProductByIdResturant} = require('../functions/productFunction')
 
+// awsSecret = "ahdkashdeukadkbdasj"
+
+// application routes
+
 // add Resturant
 router.post('/add',addProduct)
 // get all Products
@@ -10,6 +14,7 @@ router.get("/getById/:id",getProductById)
 // get by resturants
 router.get('/getByResturant/:id',getProductByIdResturant)
 // update Product
+// router.put('/update/:id',updateProduct)
 router.put('/update/:id',updateProduct)
 // delete Product
 router.delete('/delete/:id',deleteProduct)
